@@ -39,6 +39,19 @@ class Model {
 	    return $rep->fetchAll();
 	}
 
+	public static function getFour(){
+	    $SQL="SELECT * FROM ".static::$table." WHERE Role='prof' LIMIT 4";
+		$rep = model::$pdo->query($SQL);
+	  //  $rep->setFetchMode(PDO::FETCH_CLASS, 'model'.ucfirst(static::$table));
+	    return $rep->fetchAll();
+	}
+
+	public static function getThree(){
+	    $SQL="SELECT * FROM ".static::$table." LIMIT 3";
+		$rep = model::$pdo->query($SQL);
+	  //  $rep->setFetchMode(PDO::FETCH_CLASS, 'model'.ucfirst(static::$table));
+	    return $rep->fetchAll();
+	}
 
 
 	public static function getAllEtudiant(){
@@ -79,6 +92,23 @@ class Model {
 		}
 	      
 	  }
+
+
+	  public function existe($cle_primaire) {
+	    $sql = "SELECT * from ".static::$table." WHERE email=:cle_primaire";
+	    $req_prep = model::$pdo->prepare($sql);
+	    $req_prep->bindParam(":cle_primaire", $cle_primaire);
+	    $req_prep->execute();
+	  //  $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model'.ucfirst(static::$table));
+	    if ($req_prep->rowCount()==0){
+			return null;
+			die();
+	  	}else{
+			$rslt = $req_prep->fetch();
+			return $rslt;
+		}
+	      
+	  }
 	  
 	  public function selecter($cle_primaire) {
 	    $sql = "SELECT * from ".static::$table." WHERE  formation =:cle_primaire";
@@ -96,6 +126,23 @@ class Model {
 	      
   	}
 	  
+
+	  	  
+	  public function getByCat($cle_primaire) {
+	    $sql = "SELECT * from ".static::$table." WHERE  categorie =:cle_primaire";
+	    $req_prep = model::$pdo->prepare($sql);
+	    $req_prep->bindParam(":cle_primaire", $cle_primaire);
+	    $req_prep->execute();
+	  //  $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model'.ucfirst(static::$table));
+	    if ($req_prep->rowCount()==0){
+			return null;
+			die();
+	  	}else{
+			$rslt = $req_prep->fetchAll();
+			return $rslt;
+		}
+	      
+  	}
 
 
 	  public function getter($cle_primaire) {

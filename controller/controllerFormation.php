@@ -33,9 +33,23 @@ switch ($action) {
            echo json_encode($tab_p);
              break;
 
+             case "getThree":
+       
+       
+                $tab_p = ModelFormation::getThree();
+                 echo json_encode($tab_p);
+                   break;
 
-
-
+             case "getFormationByCategorie":
+       
+                if(isset($_REQUEST['categorie'])){
+                    $cat = $_REQUEST['categorie'];
+                $tab_p = ModelFormation::getByCat($cat);
+                 echo json_encode($tab_p);
+                }
+                   break;
+      
+      
 
 
   

@@ -36,7 +36,13 @@ switch ($action) {
              echo json_encode($tab_p);
                break;
 
-
+               case "getFour":
+       
+       
+                $tab_p = modelUser::getFour();
+                 echo json_encode($tab_p);
+                   break;
+    
                case "getAllEtudiant":
        
        
@@ -159,10 +165,18 @@ switch ($action) {
                     "enable"=>$enable,
                     "categorie"=>$categorie
                   
-                    );				
-                   $res = $u->insert($tab);
-                
-                echo ($res);
+                    );	
+                    
+                    
+                    $u1 = modelUser::existe($email);
+                    if($u1){
+                       
+                        echo 0;
+                    }else{
+                        $res = $u->insert($tab);
+                        echo ($res);
+                    }			
+                    
             
             break;
 
@@ -218,10 +232,18 @@ switch ($action) {
                 "enable"=>$enable,
                 "categorie"=>$categorie
               
-                );				
-               $res = $u->insert($tab);
+                );	
+                $u1 = modelUser::existe($email);
+                if($u1){
+                   
+                    echo 0;
+                }else{
+                    $res = $u->insert($tab);
+                    echo ($res);
+                }			
+                
             
-            echo ($res);
+               
         
                 break;
                    
